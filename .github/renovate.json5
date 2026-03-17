@@ -20,8 +20,8 @@
       '/\\.yaml$/',
     ],
     ignorePaths: [
-      'release/**',
-      'kustomize/base/**',
+      'devops/release/**',
+      'devops/kustomize/base/**',
     ],
   },
 }

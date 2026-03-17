@@ -1,5 +1,5 @@
 <!-- <p align="center">
-<img src="/src/frontend/static/icons/Hipster_HeroLogoMaroon.svg" width="300" alt="Online Boutique" />
+<img src="/dev/src/frontend/static/icons/Hipster_HeroLogoMaroon.svg" width="300" alt="Online Boutique" />
 </p> -->
 ![Continuous Integration](https://github.com/GoogleCloudPlatform/microservices-demo/workflows/Continuous%20Integration%20-%20Main/Release/badge.svg)
 
@@ -18,29 +18,29 @@ If you’re using this demo, please **★Star** this repository to show your int
 languages that talk to each other over gRPC.
 
 [![Architecture of
-microservices](/docs/img/architecture-diagram.png)](/docs/img/architecture-diagram.png)
+microservices](/dev/docs/img/architecture-diagram.png)](/dev/docs/img/architecture-diagram.png)
 
-Find **Protocol Buffers Descriptions** at the [`./protos` directory](/protos).
+Find **Protocol Buffers Descriptions** at the [`./dev/protos` directory](/dev/protos).
 
 | Service                                              | Language      | Description                                                                                                                       |
 | ---------------------------------------------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| [frontend](/src/frontend)                           | Go            | Exposes an HTTP server to serve the website. Does not require signup/login and generates session IDs for all users automatically. |
-| [cartservice](/src/cartservice)                     | C#            | Stores the items in the user's shopping cart in Redis and retrieves it.                                                           |
-| [productcatalogservice](/src/productcatalogservice) | Go            | Provides the list of products from a JSON file and ability to search products and get individual products.                        |
-| [currencyservice](/src/currencyservice)             | Node.js       | Converts one money amount to another currency. Uses real values fetched from European Central Bank. It's the highest QPS service. |
-| [paymentservice](/src/paymentservice)               | Node.js       | Charges the given credit card info (mock) with the given amount and returns a transaction ID.                                     |
-| [shippingservice](/src/shippingservice)             | Go            | Gives shipping cost estimates based on the shopping cart. Ships items to the given address (mock)                                 |
-| [emailservice](/src/emailservice)                   | Python        | Sends users an order confirmation email (mock).                                                                                   |
-| [checkoutservice](/src/checkoutservice)             | Go            | Retrieves user cart, prepares order and orchestrates the payment, shipping and the email notification.                            |
-| [recommendationservice](/src/recommendationservice) | Python        | Recommends other products based on what's given in the cart.                                                                      |
-| [adservice](/src/adservice)                         | Java          | Provides text ads based on given context words.                                                                                   |
-| [loadgenerator](/src/loadgenerator)                 | Python/Locust | Continuously sends requests imitating realistic user shopping flows to the frontend.                                              |
+| [frontend](/dev/src/frontend)                           | Go            | Exposes an HTTP server to serve the website. Does not require signup/login and generates session IDs for all users automatically. |
+| [cartservice](/dev/src/cartservice)                     | C#            | Stores the items in the user's shopping cart in Redis and retrieves it.                                                           |
+| [productcatalogservice](/dev/src/productcatalogservice) | Go            | Provides the list of products from a JSON file and ability to search products and get individual products.                        |
+| [currencyservice](/dev/src/currencyservice)             | Node.js       | Converts one money amount to another currency. Uses real values fetched from European Central Bank. It's the highest QPS service. |
+| [paymentservice](/dev/src/paymentservice)               | Node.js       | Charges the given credit card info (mock) with the given amount and returns a transaction ID.                                     |
+| [shippingservice](/dev/src/shippingservice)             | Go            | Gives shipping cost estimates based on the shopping cart. Ships items to the given address (mock)                                 |
+| [emailservice](/dev/src/emailservice)                   | Python        | Sends users an order confirmation email (mock).                                                                                   |
+| [checkoutservice](/dev/src/checkoutservice)             | Go            | Retrieves user cart, prepares order and orchestrates the payment, shipping and the email notification.                            |
+| [recommendationservice](/dev/src/recommendationservice) | Python        | Recommends other products based on what's given in the cart.                                                                      |
+| [adservice](/dev/src/adservice)                         | Java          | Provides text ads based on given context words.                                                                                   |
+| [loadgenerator](/dev/src/loadgenerator)                 | Python/Locust | Continuously sends requests imitating realistic user shopping flows to the frontend.                                              |
 
 ## Screenshots
 
 | Home Page                                                                                                         | Checkout Screen                                                                                                    |
 | ----------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| [![Screenshot of store homepage](/docs/img/online-boutique-frontend-1.png)](/docs/img/online-boutique-frontend-1.png) | [![Screenshot of checkout screen](/docs/img/online-boutique-frontend-2.png)](/docs/img/online-boutique-frontend-2.png) |
+| [![Screenshot of store homepage](/dev/docs/img/online-boutique-frontend-1.png)](/dev/docs/img/online-boutique-frontend-1.png) | [![Screenshot of checkout screen](/dev/docs/img/online-boutique-frontend-2.png)](/dev/docs/img/online-boutique-frontend-2.png) |
 
 ## Quickstart (GKE)
 
@@ -80,7 +80,7 @@ Find **Protocol Buffers Descriptions** at the [`./protos` directory](/protos).
 5. Deploy Online Boutique to the cluster.
 
    ```sh
-   kubectl apply -f ./release/kubernetes-manifests.yaml
+   kubectl apply -f ./devops/release/kubernetes-manifests.yaml
    ```
 
 6. Wait for the pods to be ready.
@@ -128,15 +128,15 @@ Find **Protocol Buffers Descriptions** at the [`./protos` directory](/protos).
 
 ## Additional deployment options
 
-- **Terraform**: [See these instructions](/terraform) to learn how to deploy Online Boutique using [Terraform](https://www.terraform.io/intro).
-- **Istio / Cloud Service Mesh**: [See these instructions](/kustomize/components/service-mesh-istio/README.md) to deploy Online Boutique alongside an Istio-backed service mesh.
-- **Non-GKE clusters (Minikube, Kind, etc)**: See the [Development guide](/docs/development-guide.md) to learn how you can deploy Online Boutique on non-GKE clusters.
-- **AI assistant using Gemini**: [See these instructions](/kustomize/components/shopping-assistant/README.md) to deploy a Gemini-powered AI assistant that suggests products to purchase based on an image.
-- **And more**: The [`/kustomize` directory](/kustomize) contains instructions for customizing the deployment of Online Boutique with other variations.
+- **Terraform**: [See these instructions](/devops/terraform) to learn how to deploy Online Boutique using [Terraform](https://www.terraform.io/intro).
+- **Istio / Cloud Service Mesh**: [See these instructions](/devops/kustomize/components/service-mesh-istio/README.md) to deploy Online Boutique alongside an Istio-backed service mesh.
+- **Non-GKE clusters (Minikube, Kind, etc)**: See the [Development guide](/dev/docs/development-guide.md) to learn how you can deploy Online Boutique on non-GKE clusters.
+- **AI assistant using Gemini**: [See these instructions](/devops/kustomize/components/shopping-assistant/README.md) to deploy a Gemini-powered AI assistant that suggests products to purchase based on an image.
+- **And more**: The [`/devops/kustomize` directory](/devops/kustomize) contains instructions for customizing the deployment of Online Boutique with other variations.
 
 ## Documentation
 
-- [Development](/docs/development-guide.md) to learn how to run and develop this app locally.
+- [Development](/dev/docs/development-guide.md) to learn how to run and develop this app locally.
 
 ## Demos featuring Online Boutique
 

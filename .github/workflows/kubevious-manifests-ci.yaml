@@ -18,13 +18,13 @@ on:
     branches:
       - main
     paths:
-      - 'helm-chart/**'
-      - 'kustomize/**'
+      - 'devops/helm-chart/**'
+      - 'devops/kustomize/**'
       - '.github/workflows/kubevious-manifests-ci.yaml'
   pull_request:
     paths:
-      - 'helm-chart/**'
-      - 'kustomize/**'
+      - 'devops/helm-chart/**'
+      - 'devops/kustomize/**'
       - '.github/workflows/kubevious-manifests-ci.yaml'
 permissions:
   contents: read
@@ -39,18 +39,18 @@ jobs:
         id: kubernetes-manifests-validation
         uses: kubevious/cli@v1.0.64
         with:
-          manifests: kubernetes-manifests
+          manifests: devops/kubernetes-manifests
           skip_rules: container-latest-image
 
       - name: Validate helm-chart
         id: helm-chart-validation
         uses: kubevious/cli@v1.0.64
         with:
-          manifests: helm-chart
+          manifests: devops/helm-chart
 
       - name: Validate kustomize
         id: kustomize-validation
         uses: kubevious/cli@v1.0.64
         with:
-          manifests: kustomize
+          manifests: devops/kustomize
           skip_rules: container-latest-image

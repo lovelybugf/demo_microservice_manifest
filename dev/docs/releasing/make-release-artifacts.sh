@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # This script compiles manifest files with the image tags and places them in
-# /release/...
+# /devops/release/...
 
 set -euo pipefail
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -26,7 +26,7 @@ log() { echo "$1" >&2; }
 
 TAG="${TAG:?TAG env variable must be specified}"
 REPO_PREFIX="${REPO_PREFIX:?REPO_PREFIX env variable must be specified}"
-OUT_DIR="${OUT_DIR:-${REPO_ROOT}/release}"
+OUT_DIR="${OUT_DIR:-${REPO_ROOT}/devops/release}"
 
 print_license_header() {
     cat "${SCRIPT_DIR}/license_header.txt"
@@ -62,10 +62,10 @@ read_manifests_except_kustomization() {
 }
 
 mk_kubernetes_manifests() {
-    out_manifest="$(read_manifests_except_kustomization "${REPO_ROOT}/kubernetes-manifests")"
+    out_manifest="$(read_manifests_except_kustomization "${REPO_ROOT}/devops/kubernetes-manifests")"
 
     # replace "image" repo, tag for each service
-    for dir in ./src/*/
+    for dir in ./dev/src/*/
     do
         svcname="$(basename "${dir}")"
         image="$REPO_PREFIX/$svcname:$TAG"
@@ -89,19 +89,19 @@ mk_istio_manifests() {
 
     # This just copies the yaml from the component (excluding kustomization.yaml)
     # since there is no easy way to render individual kustomize component resources
-    read_manifests_except_kustomization "${REPO_ROOT}/kustomize/components/service-mesh-istio/"
+    read_manifests_except_kustomization "${REPO_ROOT}/devops/kustomize/components/service-mesh-istio/"
     echo '# [END servicemesh_release_istio_manifests_microservices_demo]'
 }
 
 mk_kustomize_base() {
-  for file_to_copy in ./kubernetes-manifests/*.yaml
+  for file_to_copy in ./devops/kubernetes-manifests/*.yaml
   do
     # Don't copy kustomization.yaml.
-    if [[ $file_to_copy == "./kubernetes-manifests/kustomization.yaml" ]]; then
+    if [[ $file_to_copy == "./devops/kubernetes-manifests/kustomization.yaml" ]]; then
       continue
     fi
 
-    cp ${file_to_copy} ./kustomize/base/
+    cp ${file_to_copy} ./devops/kustomize/base/
 
     service_name="$(basename "${file_to_copy}" .yaml)"
     image="$REPO_PREFIX/$service_name:$TAG"
@@ -114,7 +114,7 @@ mk_kustomize_base() {
 
     pattern="^(\s*)image:\s.*${service_name}(.*)(\s*)"
     replace="\1image: ${image}\3"
-    gsed --in-place --regexp-extended "s|${pattern}|${replace}|g" ./kustomize/base/${service_name}.yaml
+    gsed --in-place --regexp-extended "s|${pattern}|${replace}|g" ./devops/kustomize/base/${service_name}.yaml
   done
 }
 

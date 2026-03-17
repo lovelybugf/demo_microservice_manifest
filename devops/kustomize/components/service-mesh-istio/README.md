@@ -161,11 +161,11 @@ Once the service mesh and namespace injection are configured, you can then deplo
 1. Enable the service-mesh-istio component.
 
    ```sh
-   cd kustomize/
+   cd devops/kustomize/
    kustomize edit add component components/service-mesh-istio
    ```
 
-   This will update the `kustomize/kustomization.yaml` file which could be similar to:
+   This will update the `devops/kustomize/kustomization.yaml` file which could be similar to:
    ```yaml
    apiVersion: kustomize.config.k8s.io/v1beta1
    kind: Kustomization

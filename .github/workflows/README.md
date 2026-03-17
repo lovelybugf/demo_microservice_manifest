@@ -22,7 +22,7 @@ These tests run on every commit for every open PR, as well as any commit to main
 These tests run on every commit for every open PR, as well as any commit to main / any release branch. This workflow:
 
 1. Creates a dedicated GKE namespace for that PR, if it doesn't already exist, in the PR GKE cluster.
-2. Uses `skaffold run` to build and push the images specific to that PR commit. Then skaffold deploys those images, via `kubernetes-manifests`, to the PR namespace in the test cluster.
+2. Uses `skaffold run` to build and push the images specific to that PR commit. Then skaffold deploys those images, via `devops/kubernetes-manifests`, to the PR namespace in the test cluster.
 3. Tests to make sure all the pods start up and become ready.
 4. Gets the LoadBalancer IP for the frontend service.
 5. Comments that IP in the pull request, for staging.
@@ -34,7 +34,7 @@ This is the Continuous Deployment workflow, and it runs on every commit to the m
 1. Builds the container images for every service, tagging as `latest`.
 2. Pushes those images to Google Container Registry.
 
-Note that this workflow does not update the image tags used in `release/kubernetes-manifests.yaml` - these release manifests are tied to a stable `v0.x.x` release.
+Note that this workflow does not update the image tags used in `devops/release/kubernetes-manifests.yaml` - these release manifests are tied to a stable `v0.x.x` release.
 
 ### Cleanup - [cleanup.yaml](cleanup.yaml)
 

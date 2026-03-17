@@ -8,25 +8,25 @@ Kustomize is a Kubernetes configuration management tool that allows users to cus
 
 ## Prerequisites
 
-Optionally, [install the `kustomize` binary](https://kubectl.docs.kubernetes.io/installation/) to avoid manually editing a `kustomization.yaml` file. Online Boutique's instructions will often use `kustomize edit` (like `kustomize edit add component components/some-component`), but you can skip these commands and instead add components manually to the [`/kustomize/kustomization.yaml` file](/kustomize/kustomization.yaml).
+Optionally, [install the `kustomize` binary](https://kubectl.docs.kubernetes.io/installation/) to avoid manually editing a `kustomization.yaml` file. Online Boutique's instructions will often use `kustomize edit` (like `kustomize edit add component components/some-component`), but you can skip these commands and instead add components manually to the [`/devops/kustomize/kustomization.yaml` file](/devops/kustomize/kustomization.yaml).
 
 You need to have a Kubernetes cluster where you will deploy the Online Boutique's Kubernetes manifests. To set up a GKE (Google Kubernetes Engine) cluster, you can follow the instruction in the [root `/README.md`](/).
 
 ## Deploy Online Boutique with Kustomize
 
-1. From the root folder of this repository, navigate to the `kustomize/` directory.
+1. From the root folder of this repository, navigate to the `devops/kustomize/` directory.
 
     ```bash
-    cd kustomize/
+    cd devops/kustomize/
     ```
 
-1. See what the default Kustomize configuration defined by `kustomize/kustomization.yaml` will generate (without actually deploying them yet).
+1. See what the default Kustomize configuration defined by `devops/kustomize/kustomization.yaml` will generate (without actually deploying them yet).
 
     ```bash
     kubectl kustomize .
     ```
 
-1. Apply the default Kustomize configuration (`kustomize/kustomization.yaml`).
+1. Apply the default Kustomize configuration (`devops/kustomize/kustomization.yaml`).
 
     ```bash
     kubectl apply -k .
@@ -91,11 +91,11 @@ These changes directly affect `cartservice`.
 
 ### Select variations
 
-To customize Online Boutique with its variations, you need to update the default `kustomize/kustomization.yaml` file. You could do that manually, use `sed`, or use the `kustomize edit` command like illustrated below.
+To customize Online Boutique with its variations, you need to update the default `devops/kustomize/kustomization.yaml` file. You could do that manually, use `sed`, or use the `kustomize edit` command like illustrated below.
 
 #### Use `kustomize edit` to select variations
 
-Here is an example with the [**Cymbal Shops Branding**](components/cymbal-branding) variation, from the `kustomize/` folder, run the command below:
+Here is an example with the [**Cymbal Shops Branding**](components/cymbal-branding) variation, from the `devops/kustomize/` folder, run the command below:
 
 ```bash
 kustomize edit add component components/cymbal-branding
@@ -131,10 +131,10 @@ Kustomize allows you to reference public remote resources so the `kustomization.
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- github.com/GoogleCloudPlatform/microservices-demo/kustomize/base
+- github.com/GoogleCloudPlatform/microservices-demo/devops/kustomize/base
 components:
-- github.com/GoogleCloudPlatform/microservices-demo/kustomize/components/cymbal-branding
-- github.com/GoogleCloudPlatform/microservices-demo/kustomize/components/google-cloud-operations
+- github.com/GoogleCloudPlatform/microservices-demo/devops/kustomize/components/cymbal-branding
+- github.com/GoogleCloudPlatform/microservices-demo/devops/kustomize/components/google-cloud-operations
 ```
 
 Learn more about [Kustomize remote targets](https://github.com/kubernetes-sigs/kustomize/blob/master/examples/remoteBuild.md).

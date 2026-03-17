@@ -24,29 +24,29 @@ build:
   # here:
   # https://skaffold.dev/docs/concepts/#image-repository-handling
   - image: emailservice
-    context: src/emailservice
+    context: dev/src/emailservice
   - image: productcatalogservice
-    context: src/productcatalogservice
+    context: dev/src/productcatalogservice
   - image: recommendationservice
-    context: src/recommendationservice
+    context: dev/src/recommendationservice
   - image: shoppingassistantservice
-    context: src/shoppingassistantservice
+    context: dev/src/shoppingassistantservice
   - image: shippingservice
-    context: src/shippingservice
+    context: dev/src/shippingservice
   - image: checkoutservice
-    context: src/checkoutservice
+    context: dev/src/checkoutservice
   - image: paymentservice
-    context: src/paymentservice
+    context: dev/src/paymentservice
   - image: currencyservice
-    context: src/currencyservice
+    context: dev/src/currencyservice
   - image: cartservice
-    context: src/cartservice/src
+    context: dev/src/cartservice/src
     docker:
       dockerfile: Dockerfile
   - image: frontend
-    context: src/frontend
+    context: dev/src/frontend
   - image: adservice
-    context: src/adservice
+    context: dev/src/adservice
   tagPolicy:
     gitCommit: {}
   local:
@@ -55,7 +55,7 @@ build:
 manifests:
   kustomize:
     paths:
-    - kubernetes-manifests
+    - devops/kubernetes-manifests
 deploy:
   kubectl: {}
 # "gcb" profile allows building and pushing the images
@@ -91,7 +91,7 @@ profiles:
   patches:
   - op: add
     path: /manifests/kustomize/paths/1
-    value: kustomize/components/network-policies
+    value: devops/kustomize/components/network-policies
 ---
 apiVersion: skaffold/v3
 kind: Config
@@ -104,13 +104,13 @@ build:
   platforms: ["linux/amd64", "linux/arm64"]
   artifacts:
   - image: loadgenerator
-    context: src/loadgenerator
+    context: dev/src/loadgenerator
   local:
     useDockerCLI: true
     useBuildkit: true
 manifests:
   rawYaml:
-  - ./kubernetes-manifests/loadgenerator.yaml
+  - ./devops/kubernetes-manifests/loadgenerator.yaml
 deploy:
   kubectl: {}
 profiles:

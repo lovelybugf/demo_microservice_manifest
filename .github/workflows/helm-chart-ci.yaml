@@ -18,11 +18,11 @@ on:
     branches:
       - main
     paths:
-      - 'helm-chart/**'
+      - 'devops/helm-chart/**'
       - '.github/workflows/helm-chart-ci.yaml'
   pull_request:
     paths:
-      - 'helm-chart/**'
+      - 'devops/helm-chart/**'
       - '.github/workflows/helm-chart-ci.yaml'
 jobs:
   helm-chart-ci:
@@ -31,11 +31,11 @@ jobs:
       - uses: actions/checkout@v6
       - name: helm lint
         run: |
-          cd helm-chart/
+          cd devops/helm-chart/
           helm lint --strict
       - name: helm template default
         run: |
-          cd helm-chart/
+          cd devops/helm-chart/
           helm template . > helm-template.yaml
           cat helm-template.yaml 
           kustomize create --resources helm-template.yaml
@@ -43,7 +43,7 @@ jobs:
       - name: helm template grpc health probes
         run: |
           # Test related to https://medium.com/google-cloud/b5bd26253a4c
-          cd helm-chart/
+          cd devops/helm-chart/
           SPANNER_CONNECTION_STRING=projects/PROJECT_ID/instances/SPANNER_INSTANCE_NAME/databases/SPANNER_DATABASE_NAME
           helm template . \
             --set nativeGrpcHealthCheck=true \
@@ -54,7 +54,7 @@ jobs:
       - name: helm template spanner
         run: |
           # Test related to https://medium.com/google-cloud/f7248e077339
-          cd helm-chart/
+          cd devops/helm-chart/
           SPANNER_CONNECTION_STRING=projects/PROJECT_ID/instances/SPANNER_INSTANCE_NAME/databases/SPANNER_DATABASE_NAME
           SPANNER_DB_USER_GSA_ID=spanner-db-user@my-project.iam.gserviceaccount.com
           helm template . \
@@ -71,7 +71,7 @@ jobs:
       - name: helm template asm
         run: |
           # Test related to https://medium.com/google-cloud/246119e46d53
-          cd helm-chart/
+          cd devops/helm-chart/
           helm template . \
             --set networkPolicies.create=true \
             --set sidecars.create=true \
@@ -90,7 +90,7 @@ jobs:
       - name: helm template memorystore istio tls origination
         run: |
           # Test related to https://medium.com/google-cloud/64b71969318d
-          cd helm-chart/
+          cd devops/helm-chart/
           REDIS_IP=0.0.0.0
           REDIS_PORT=7378
           REDIS_CERT=dsjfgkldsjflkdsjflksdajfkldsjkfljsdaklfjaskjfakdsjfaklsdjflskadjfklasjfkls

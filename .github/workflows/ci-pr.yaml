@@ -19,11 +19,11 @@ on:
       - main
     paths-ignore:
       - '**/README.md'
-      - 'kustomize/**'
+      - 'devops/kustomize/**'
       - '.github/workflows/kustomize-build-ci.yaml'
-      - 'terraform/**'
+      - 'devops/terraform/**'
       - '.github/workflows/terraform-validate-ci.yaml'
-      - 'helm-chart/**'
+      - 'devops/helm-chart/**'
       - '.github/workflows/helm-chart-ci.yaml'
 
 # Ensure this workflow only runs for the most recent commit of a pull-request
@@ -49,14 +49,14 @@ jobs:
       run: |
         for GO_PACKAGE in "shippingservice" "productcatalogservice" "frontend/validator"; do
           echo "Testing $GO_PACKAGE..."
-          pushd src/$GO_PACKAGE
+          pushd dev/src/$GO_PACKAGE
           go test
           popd
         done
     - name: C# Unit Tests
       timeout-minutes: 10
       run: |
-        dotnet test src/cartservice/
+        dotnet test dev/src/cartservice/
 
   deployment-tests:
     runs-on: [self-hosted, is-enabled]

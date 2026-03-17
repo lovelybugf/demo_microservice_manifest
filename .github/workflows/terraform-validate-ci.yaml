@@ -18,11 +18,11 @@ on:
     branches:
       - main
     paths:
-      - 'terraform/**'
+      - 'devops/terraform/**'
       - '.github/workflows/terraform-validate-ci.yaml'
   pull_request:
     paths:
-      - 'terraform/**'
+      - 'devops/terraform/**'
       - '.github/workflows/terraform-validate-ci.yaml'
 jobs:
   terraform-validate-ci:
@@ -32,6 +32,6 @@ jobs:
       - uses: hashicorp/setup-terraform@v4
       - name: terraform init & validate
         run: |
-          cd terraform/
+          cd devops/terraform/
           terraform init -backend=false
           terraform validate

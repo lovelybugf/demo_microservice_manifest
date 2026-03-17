@@ -66,7 +66,7 @@ This doc explains how to build and run the Online Boutique source code locally u
 
     - Builds the container images.
     - Pushes them to AR.
-    - Applies the `./kubernetes-manifests` deploying the application to
+    - Applies the `./devops/kubernetes-manifests` deploying the application to
       Kubernetes.
 
     **Troubleshooting:** If you get "No space left on device" error on Google

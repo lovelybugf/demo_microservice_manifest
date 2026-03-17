@@ -22,20 +22,20 @@ This document walks through the process of creating a new release of Online Bout
 
 ## Create and tag the new release
 
-Run the `make-release.sh` script found inside the `docs/releasing/` directory:
+Run the `make-release.sh` script found inside the `dev/docs/releasing/` directory:
 
 ```sh
 # assuming you are inside the root path of the bank-of-anthos repository
 export TAG=vX.Y.Z # This is the new version (e.g. `v0.3.5`)
 export REPO_PREFIX=us-central1-docker.pkg.dev/google-samples/microservices-demo # This is the Docker repository for tagged images
 export PROJECT_ID=google-samples # This is the Google Cloud project for the release CI
-./docs/releasing/make-release.sh
+./dev/docs/releasing/make-release.sh
 ```
 
 This script does the following:
 1. Uses `make-docker-images.sh` to build and push a Docker image for each microservice to the previously specified repository.
-2. Uses `make-release-artifacts.sh` to regenerates (and update the image $TAGS) YAML file at `./release/kubernetes-manifests.yaml` and `./kustomize/base/`.
-3. Runs `git tag` and pushes a new branch (e.g., `release/v0.3.5`) with the changes to `./release/kubernetes-manifests.yaml`.
+2. Uses `make-release-artifacts.sh` to regenerates (and update the image $TAGS) YAML file at `./devops/release/kubernetes-manifests.yaml` and `./devops/kustomize/base/`.
+3. Runs `git tag` and pushes a new branch (e.g., `release/v0.3.5`) with the changes to `./devops/release/kubernetes-manifests.yaml`.
 
 You can then browse the [Container Registry repository](https://pantheon.corp.google.com/gcr/images/google-samples/global/microservices-demo?project=google-samples) to make sure a Docker image was created for each microservice (with the new version tag).
 
@@ -68,10 +68,10 @@ Once the release notes are published, you should then replace the version of the
      --zone us-central1-c --project online-boutique-ci
    ```
 
-2. Deploy `release/kubernetes-manifests.yaml` to it:
+2. Deploy `devops/release/kubernetes-manifests.yaml` to it:
 
    ```sh
-   kubectl apply -f ./release/kubernetes-manifests.yaml
+   kubectl apply -f ./devops/release/kubernetes-manifests.yaml
    ```
 
 3. Remove unnecessary objects:

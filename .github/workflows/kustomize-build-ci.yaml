@@ -18,11 +18,11 @@ on:
     branches:
       - main
     paths:
-      - 'kustomize/**'
+      - 'devops/kustomize/**'
       - '.github/workflows/kustomize-build-ci.yaml'
   pull_request:
     paths:
-      - 'kustomize/**'
+      - 'devops/kustomize/**'
       - '.github/workflows/kustomize-build-ci.yaml'
 jobs:
   kustomize-build-ci:
@@ -31,12 +31,12 @@ jobs:
       - uses: actions/checkout@v6
       - name: kustomize build base
         run: |
-          cd kustomize/
+          cd devops/kustomize/
           kubectl kustomize .
       # Build the different combinations of Kustomize components found in kustomize/tests.
       - name: kustomize build tests
         run: |
-          cd kustomize/tests
+          cd devops/kustomize/tests
           KUSTOMIZE_TESTS_SUBFOLDERS=$(ls -d */)
           for test in $KUSTOMIZE_TESTS_SUBFOLDERS;
           do
