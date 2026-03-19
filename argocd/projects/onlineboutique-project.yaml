@@ -7,7 +7,7 @@ spec:
   description: Online Boutique GitOps project (dev/staging/prod)
   sourceRepos:
     # Replace with your manifests repo URL(s)
-    - https://github.com/<org>/<manifests-repo>.git
+    - https://github.com/lovelybugf/demo_microservice_manifest.git
   destinations:
     - namespace: onlineboutique-dev
       server: https://kubernetes.default.svc

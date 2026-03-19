@@ -6,7 +6,7 @@ metadata:
 spec:
   project: onlineboutique
   source:
-    repoURL: https://github.com/<org>/<manifests-repo>.git
+    repoURL: https://github.com/lovelybugf/demo_microservice_manifest.git
     targetRevision: main
     path: rbac
     directory:
