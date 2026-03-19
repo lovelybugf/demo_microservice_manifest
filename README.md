@@ -52,3 +52,38 @@ This separation lets you:
 - promote changes between environments via Git branches/PRs
 - enforce least-privilege RBAC for different teams (dev, QA, platform)
 - use Argo CD as the single source of truth for what is actually deployed.
+
+## Daily update workflow (branches + Argo CD)
+
+Branches:
+
+- `main`: canonical source for shared manifests (base, components, Argo CD apps, RBAC, etc.).
+- `env/dev`: what is currently deployed to the dev environment.
+- `env/staging`: what is currently deployed to the staging environment.
+- `env/prod`: what is currently deployed to the production environment.
+
+Typical workflow when changing manifests:
+
+1. Work and review on `main` (or a feature branch that is merged into `main`).
+2. After changes on `main` are ready for dev:
+   ```bash
+   git checkout env/dev
+   git merge main
+   git push
+   ```
+   Argo CD application `onlineboutique-dev` (watching `env/dev`) will detect the new commit and sync to `onlineboutique-dev`.
+3. When dev is validated and you want to promote to staging:
+   ```bash
+   git checkout env/staging
+   git merge env/dev
+   git push
+   ```
+   Argo CD application `onlineboutique-staging` (watching `env/staging`) will sync to `onlineboutique-staging`.
+4. When staging is validated and you want to promote to production:
+   ```bash
+   git checkout env/prod
+   git merge env/staging
+   git push
+   ```
+   Argo CD application `onlineboutique-prod` (watching `env/prod`) will see the new commit; production sync is typically done manually from the Argo CD UI for extra safety.
+
