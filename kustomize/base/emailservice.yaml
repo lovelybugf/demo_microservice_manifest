@@ -43,7 +43,7 @@ spec:
               - ALL
           privileged: false
           readOnlyRootFilesystem: true
-        image: figbugmely/onlineboutique-emailservice:5bf88e289ac8bc2c1c2842e22b2eb3b1dd789c09
+        image: figbugmely/onlineboutique-emailservice:52b8c5a44728c3b1860755c43a97e41cb50d9597
         ports:
         - containerPort: 8080
         env:
