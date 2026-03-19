@@ -13,26 +13,26 @@ labels:
       env: prod
 
 replicas:
-  - name: adservice
+  - name: frontend
     count: 2
   - name: cartservice
-    count: 3
+    count: 1
+  - name: adservice
+    count: 0
   - name: checkoutservice
-    count: 3
+    count: 0
   - name: currencyservice
-    count: 3
+    count: 0
   - name: emailservice
-    count: 2
-  - name: frontend
-    count: 3
+    count: 0
   - name: loadgenerator
     count: 0
   - name: paymentservice
-    count: 3
+    count: 0
   - name: productcatalogservice
-    count: 3
+    count: 0
   - name: recommendationservice
-    count: 3
+    count: 0
   - name: shippingservice
-    count: 3
+    count: 0
 
