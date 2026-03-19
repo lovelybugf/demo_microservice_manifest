@@ -43,7 +43,7 @@ spec:
               - ALL
           privileged: false
           readOnlyRootFilesystem: true
-        image: figbugmely/onlineboutique-paymentservice:576bd684599c31154429f0080628ea1f9944ae0e
+        image: figbugmely/onlineboutique-paymentservice:9e0af4a2b7fc8d5494e4484d10207d6dfdca1bed
         ports:
         - containerPort: 50051
         env:
