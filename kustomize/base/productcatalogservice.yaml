@@ -43,7 +43,7 @@ spec:
               - ALL
           privileged: false
           readOnlyRootFilesystem: true
-        image: us-central1-docker.pkg.dev/google-samples/microservices-demo/productcatalogservice:v0.10.5
+        image: figbugmely/onlineboutique-productcatalogservice:576bd684599c31154429f0080628ea1f9944ae0e
         ports:
         - containerPort: 3550
         env:

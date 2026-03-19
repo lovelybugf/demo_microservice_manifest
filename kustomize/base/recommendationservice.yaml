@@ -43,7 +43,7 @@ spec:
               - ALL
           privileged: false
           readOnlyRootFilesystem: true
-        image: figbugmely/onlineboutique-recommendationservice:52b8c5a44728c3b1860755c43a97e41cb50d9597
+        image: figbugmely/onlineboutique-recommendationservice:576bd684599c31154429f0080628ea1f9944ae0e
         ports:
         - containerPort: 8080
         readinessProbe:

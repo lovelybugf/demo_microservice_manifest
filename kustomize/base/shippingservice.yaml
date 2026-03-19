@@ -42,7 +42,7 @@ spec:
               - ALL
           privileged: false
           readOnlyRootFilesystem: true
-        image: figbugmely/onlineboutique-shippingservice:5bf88e289ac8bc2c1c2842e22b2eb3b1dd789c09
+        image: figbugmely/onlineboutique-shippingservice:576bd684599c31154429f0080628ea1f9944ae0e
         ports:
         - containerPort: 50051
         env:
