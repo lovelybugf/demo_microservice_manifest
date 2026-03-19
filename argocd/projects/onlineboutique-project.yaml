@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: onlineboutique
+  namespace: argocd
+spec:
+  description: Online Boutique GitOps project (dev/staging/prod)
+  sourceRepos:
+    # Replace with your manifests repo URL(s)
+    - https://github.com/<org>/<manifests-repo>.git
+  destinations:
+    - namespace: onlineboutique-dev
+      server: https://kubernetes.default.svc
+    - namespace: onlineboutique-staging
+      server: https://kubernetes.default.svc
+    - namespace: onlineboutique-prod
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: ""
+      kind: Namespace
+  namespaceResourceWhitelist:
+    - group: "*"
+      kind: "*"
+

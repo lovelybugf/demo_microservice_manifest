@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: onlineboutique-dev
+  namespace: argocd
+spec:
+  project: onlineboutique
+  source:
+    repoURL: https://github.com/<org>/<manifests-repo>.git
+    targetRevision: env/dev
+    path: kustomize/environments/dev
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: onlineboutique-dev
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+

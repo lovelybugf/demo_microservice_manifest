@@ -2,14 +2,23 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: onlineboutique-dev
+  labels:
+    app.kubernetes.io/part-of: onlineboutique
+    env: dev
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
   name: onlineboutique-staging
+  labels:
+    app.kubernetes.io/part-of: onlineboutique
+    env: staging
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
   name: onlineboutique-prod
+  labels:
+    app.kubernetes.io/part-of: onlineboutique
+    env: prod
 
