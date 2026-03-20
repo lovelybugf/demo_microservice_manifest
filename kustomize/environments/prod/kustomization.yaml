@@ -14,10 +14,9 @@ labels:
 
 replicas:
   - name: frontend
-    count: 2
-  # Service thứ 2 tạm giữ replica = 1 (giảm tải CPU)
+    count: 0
   - name: cartservice
-    count: 1
+    count: 0
   - name: adservice
     count: 0
   - name: checkoutservice
