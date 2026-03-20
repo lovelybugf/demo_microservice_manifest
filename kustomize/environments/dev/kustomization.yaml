@@ -14,25 +14,25 @@ labels:
 
 replicas:
   - name: adservice
-    count: 1
+    count: 0
   - name: cartservice
-    count: 1
+    count: 0
   - name: checkoutservice
-    count: 1
+    count: 0
   - name: currencyservice
-    count: 1
+    count: 0
   - name: emailservice
-    count: 1
+    count: 0
   - name: frontend
-    count: 1
+    count: 0
   - name: loadgenerator
-    count: 1
+    count: 0
   - name: paymentservice
-    count: 1
+    count: 0
   - name: productcatalogservice
-    count: 1
+    count: 0
   - name: recommendationservice
-    count: 1
+    count: 0
   - name: shippingservice
-    count: 1
+    count: 0
 
