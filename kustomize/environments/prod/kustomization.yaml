@@ -14,9 +14,9 @@ labels:
 
 replicas:
   - name: frontend
-    count: 2
+    count: 0
   - name: cartservice
-    count: 1
+    count: 0
   - name: adservice
     count: 0
   - name: checkoutservice

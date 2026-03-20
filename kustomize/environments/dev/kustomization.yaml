@@ -13,18 +13,17 @@ labels:
       env: dev
 
 replicas:
-  - name: frontend
-    count: 2
-  # Service thứ 2 tạm giữ replica = 1 (để giảm tải CPU)
-  - name: cartservice
-    count: 1
   - name: adservice
+    count: 0
+  - name: cartservice
     count: 0
   - name: checkoutservice
     count: 0
   - name: currencyservice
     count: 0
   - name: emailservice
+    count: 0
+  - name: frontend
     count: 0
   - name: loadgenerator
     count: 0
